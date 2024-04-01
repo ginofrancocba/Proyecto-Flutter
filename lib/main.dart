@@ -69,10 +69,10 @@ class MyHomePage extends StatelessWidget {
                 } ,
               ) ,
             ) ,
-            Expanded(
-              child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer ,
-                child: GeneratorPage(),
+          Expanded(
+            child: Container(
+              color: Theme.of(context).colorScheme.primaryContainer ,
+              child: GeneratorPage(),
               ) ,
             ) ,      
           ] ,
