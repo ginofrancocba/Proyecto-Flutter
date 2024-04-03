@@ -81,7 +81,6 @@ class MyHomePage extends StatelessWidget {
     }
   }  
 
-
 class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -111,7 +110,7 @@ class GeneratorPage extends StatelessWidget {
                   icon: Icon (icon),
                   label:  Text ('Like'),
                 ),
-                SizedBox(width: 20), 
+                SizedBox(width: 10), 
                 ElevatedButton(
                   onPressed: () {
                     appState.getNext() ;
@@ -125,8 +124,6 @@ class GeneratorPage extends StatelessWidget {
       ) ;   
     }
   }
-
-
 
 class BigCard extends StatelessWidget {
   const BigCard({
