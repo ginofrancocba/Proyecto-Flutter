@@ -1,6 +1,5 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -34,12 +33,12 @@ void getNext() {
   notifyListeners() ;
   }
 
-var favorities = <WordPair>[] ; 
+var favorites = <WordPair>[] ; 
 void toggleFavorite() {
-  if (favorities.contains(current)) {
-    favorities.remove(current) ;
+  if (favorites.contains(current)) {
+    favorites.remove(current) ;
   } else {
-    favorities.add(current) ;
+    favorites.add(current) ;
   }
   notifyListeners() ;
 } 
@@ -103,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
       }
     ) ;  
-    }
+  }
 }  
 
 class GeneratorPage extends StatelessWidget {
@@ -113,7 +112,7 @@ class GeneratorPage extends StatelessWidget {
     var pair = appState.current;
 
     IconData icon;
-      if (appState.favorities.contains(pair)) {
+      if (appState.favorites.contains(pair)) {
         icon = Icons.favorite ;
       } else {
         icon = Icons.favorite_border ;
@@ -152,19 +151,27 @@ class GeneratorPage extends StatelessWidget {
 
 class BigCard extends StatelessWidget {
   const BigCard({
-    super.key,
     required this.pair,
   });
 
   final WordPair pair;
-
+  
   @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+}
+  
+@override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final style = theme.textTheme.displayMedium!.copyWith(
       color: theme.colorScheme.onSecondary,
     );
 
+    // ignore: prefer_typing_uninitialized_variables
+    var pair;
     return Card(
       color: theme.colorScheme.primary,
       child: Padding(
@@ -177,4 +184,32 @@ class BigCard extends StatelessWidget {
       ),
     );
   }
-}
+
+  class FavoritesPage extends StatelessWidget { 
+    @override
+    Widget build(BuildContext context) {
+      var appState = context.watch<MyAppState>() ;
+
+    if (appState.favorites.isEmpty) {
+      return Center(
+        child: Text('No favorites yet.')
+        ) ;
+    }
+
+    return ListView(
+     children: [
+      Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text('You have ${appState.favorites.length} favorites:'),
+        ),
+        for (var pair in appState.favorites)
+          ListTile(
+           leading: Icon(Icons.favorite),
+           title: Text(pair.asLowerCase), 
+          ),        
+        ], 
+      );
+    }
+  }
+
+
